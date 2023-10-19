@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Permission Slip</title>
+</head>
+<body>
+    <h1>Permission Slip for Operation Christmas Child Shopping</h1>
+    <form action="mailto:matthewshawn89@gmail.com" method="post" enctype="text/plain">
+        <p>My child (name) <input type="text" name="childName"> has my permission to go to Wooster with the MCA Middle School Class on</p>
+          <p>Sunday, November 5th, 2023 following the Chili Cook Off to purchase items for Operation Chirstmas Child. </p>
+        <p>Date: <input type="date" name="eventDate" id="currentDate"></p>
+        <p>Parent/Guardian Signature: <canvas id="signatureCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas></p>
+        <button type="button" id="clearSignature">Clear Signature</button>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const signatureCanvas = document.getElementById('signatureCanvas');
+        const clearSignatureButton = document.getElementById('clearSignature');
+        const ctx = signatureCanvas.getContext('2d');
+
+        clearSignatureButton.addEventListener('click', () => {
+            ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+        });
+    </script>
+</body>
+</html>
