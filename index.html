@@ -2,12 +2,13 @@
 <html>
 <head>
     <title>Permission Slip</title>
+    <script src="https://unpkg.com/signature_pad"></script>
 </head>
 <body>
     <h1>Permission Slip for Operation Christmas Child Shopping</h1>
     <form action="mailto:matthewshawn89@gmail.com" method="post" enctype="text/plain">
         <p>My child (name) <input type="text" name="childName"> has my permission to go to Wooster with the MCA Middle School Class on</p>
-          <p>Sunday, November 5th, 2023 following the Chili Cook Off to purchase items for Operation Chirstmas Child. </p>
+        <p>Sunday, November 5th, 2023, following the Chili Cook Off to purchase items for Operation Christmas Child. </p>
         <p>Date: <input type="date" name="eventDate" id="currentDate"></p>
         <p>Parent/Guardian Signature: <canvas id="signatureCanvas" width="400" height="200" style="border: 1px solid #000;"></canvas></p>
         <button type="button" id="clearSignature">Clear Signature</button>
@@ -17,10 +18,20 @@
     <script>
         const signatureCanvas = document.getElementById('signatureCanvas');
         const clearSignatureButton = document.getElementById('clearSignature');
-        const ctx = signatureCanvas.getContext('2d');
+        const currentDateInput = document.getElementById('currentDate');
+
+        // Set the current date in the date input field
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        const yyyy = today.getFullYear();
+        currentDateInput.value = `${yyyy}-${mm}-${dd}`;
+
+        // Initialize the SignaturePad
+        const signaturePad = new SignaturePad(signatureCanvas);
 
         clearSignatureButton.addEventListener('click', () => {
-            ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            signaturePad.clear();
         });
     </script>
 </body>
