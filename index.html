@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Permission Slip for Operation Christmas Child Shopping</h1>
-    <form action="mailto:matthewshawn89@gmail.com" method="post" enctype="text/plain">
+    <form id="permissionForm" action="https://formspree.io/f/xbjvqvbr" method="POST">
         <p>My child (name) <input type="text" name="childName"> has my permission to go to Wooster with the MCA Middle School Class on</p>
         <p>Sunday, November 5th, 2023, following the Chili Cook Off to purchase items for Operation Christmas Child. </p>
         <p>Date: <input type="date" name="eventDate" id="currentDate"></p>
@@ -19,6 +19,7 @@
         const signatureCanvas = document.getElementById('signatureCanvas');
         const clearSignatureButton = document.getElementById('clearSignature');
         const currentDateInput = document.getElementById('currentDate');
+        const permissionForm = document.getElementById('permissionForm');
 
         // Set the current date in the date input field
         const today = new Date();
@@ -32,6 +33,22 @@
 
         clearSignatureButton.addEventListener('click', () => {
             signaturePad.clear();
+        });
+
+        permissionForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Convert the signature to a data URL
+            const signatureDataURL = signaturePad.toDataURL();
+
+            // Add the signature data to a hidden input field
+            const signatureImageInput = document.createElement('input');
+            signatureImageInput.type = 'hidden';
+            signatureImageInput.name = 'signatureImage';
+            signatureImageInput.value = signatureDataURL;
+            permissionForm.appendChild(signatureImageInput);
+
+            // Now submit the form
+            permissionForm.submit();
         });
     </script>
 </body>
